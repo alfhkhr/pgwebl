@@ -268,6 +268,19 @@ var polyline = L.geoJson(null, {
                polygon.addData(data);
                map.addLayer(polygon);
            });
+
+           // Layer Control
+        var baseMaps = {
+            "OpenStreetMap": L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png')
+        };
+
+        var overlayMaps = {
+            "Points": point,
+            "Polylines": polyline,
+            "Polygons": polygon
+        };
+
+        L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
     </script>
 @endsection
 
