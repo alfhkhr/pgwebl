@@ -38,6 +38,7 @@ class PolygonsController extends Controller
                 'name' => 'required|unique:polygons,name',
                 'description' => 'required',
                 'geom_polygons' => 'required',
+                'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:50'
             ],
             [
                 'name.required' => 'Name is required',
@@ -47,11 +48,25 @@ class PolygonsController extends Controller
             ]
         );
 
+        #create image directory if not exists
+        if (!is_dir('storage/images')) {
+            mkdir('./storage/images', 0777);
+         }
+
+         #Get image file
+         if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name_image = time() . "_polygon." . strtolower($image->getClientOriginalExtension());
+            $image->move('storage/images', $name_image);
+          } else {
+            $name_image = null;
+          }
 
         $data = [
             'geom' => $request->geom_polygons,
             'name' => $request->name,
             'description' => $request->description,
+            'image' => $name_image,
         ];
         //Create Data
         if (!$this->polygons->create($data)) {
