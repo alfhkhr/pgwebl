@@ -107,6 +107,19 @@ class PolygonsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $imagefile = $this->polygons->find($id)->image;
+
+        if (!$this->polygons->destroy($id)) {
+            return redirect()->route('map')->with('error', 'Point failed to delete');
+        }
+
+        //Delete image file
+        if ($imagefile !=null) {
+            if (file_exists('.storage/images/'. $imagefile)) {
+                unlink('.storage/images/' .$imagefile);
+            }
+        }
+
+        return redirect()->route('map')->with('success', 'Point has been delete');
     }
 }
