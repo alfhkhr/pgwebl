@@ -320,7 +320,7 @@ var polyline = L.geoJson(null, {
                        .area_km.toFixed(2) + "<br>" + "Luas (M): " + feature.properties
                        .area_m.toFixed(2) + "<br>" + "Deskripsi: " + feature.properties.description + "<br>" +
                        "Dibuat: " + feature.properties.created_at + "<br>" +
-                       "<img src='{{asset('storage/images')}}/"+ feature.properties.image +"' width='250' alt=''>" + + "<br>"+
+                       "<img src='{{asset('storage/images')}}/"+ feature.properties.image +"' width='250' alt=''>" +"<br>"+
                     "<div class='row mt-4'>" +
                         "<div class='col-6 text-end'>" +
                             "<a href='" + routeedit + "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
@@ -359,7 +359,10 @@ var polyline = L.geoJson(null, {
             "Polygons": polygon
         };
 
-        L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
+        L.control.layers(baseMaps, overlayMaps, {
+            collapsed: false,
+            position:"bottomright",
+        }).addTo(map);
     </script>
 @endsection
 

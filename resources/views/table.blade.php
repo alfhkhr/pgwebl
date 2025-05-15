@@ -1,44 +1,33 @@
 @extends('layout.template')
 
 @section('content')
+<div class="container mt-4">
 <table class="table table-striped">
-    <head>
+    <thead>
         <tr>
             <th>No</th>
             <th>Nama</th>
-            <th>NIM</th>
-            <th>Kelas</th>
+            <th>Descriptions</th>
+            <th>Image</th>
+            <th>Created At</th>
+            <th>Updated At</th>
         </tr>
+        </thead>
+        <tbody>
+        @foreach ($point as $p )
         <tr>
-            <td>1</td>
-            <td>Alifah</td>
-            <td>23/515178/SV/22490</td>
-            <td>A</td>
+            <td>{{$p->id}}</td>
+            <td>{{$p->name}}</td>
+            <td>{{$p->description}}</td>
+            <td>
+                <img src="{{asset('storage/images/' . $p->image)}}" alt=""
+                width="200" title="{{$p->image}}">
+            </td>
+            <td>{{$p->created_at}}</td>
+            <td>{{$p->updated_at}}</td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>Cece</td>
-            <td>23/512298/SV/22217</td>
-            <td>A</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Myla</td>
-            <td>23/522046/SV/23577</td>
-            <td>B</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Zahra</td>
-            <td>23/518296/SV/22946</td>
-            <td>A</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Angel</td>
-            <td>23/514461/SV/22354</td>
-            <td>B</td>
-        </tr>
-    </head>
+        @endforeach
+        </tbody>
 </table>
+</div>
 @endsection

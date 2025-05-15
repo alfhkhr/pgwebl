@@ -26,9 +26,10 @@
             <h1 class="modal-title fs-5" id="exampleModalLabel">Create Polygon</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="{{route('polygons.store')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('polygons.update',$id)}}" enctype="multipart/form-data">
             <div class="modal-body">
                     @csrf
+                    @method('PATCH')
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -112,7 +113,7 @@ var drawnItems = new L.FeatureGroup();
                 //menampilkan data ke dalam modal #EditPolygonModal
                 $('#name').val(properties.name);
                 $('#description').val(properties.description);
-                $('#geom_polylgon').val(objectGeometry);
+                $('#geom_polygon').val(objectGeometry);
                 $('#preview-image-polygon').attr('src', "{{asset('storage/images')}}/" + properties.image);
 
                 //menampilkan modal edit
