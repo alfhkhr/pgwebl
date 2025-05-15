@@ -9,7 +9,7 @@ class PolygonsController extends Controller
 {
     public function __construct()
     {
-        $this->polygons= new PolygonsModel();
+        $this->polygons = new PolygonsModel();
     }
     /**
      * Display a listing of the resource.
@@ -51,16 +51,16 @@ class PolygonsController extends Controller
         #create image directory if not exists
         if (!is_dir('storage/images')) {
             mkdir('./storage/images', 0777);
-         }
+        }
 
-         #Get image file
-         if ($request->hasFile('image')) {
+        #Get image file
+        if ($request->hasFile('image')) {
             $image = $request->file('image');
             $name_image = time() . "_polygon." . strtolower($image->getClientOriginalExtension());
             $image->move('storage/images', $name_image);
-          } else {
+        } else {
             $name_image = null;
-          }
+        }
 
         $data = [
             'geom' => $request->geom_polygons,
@@ -70,12 +70,12 @@ class PolygonsController extends Controller
         ];
         //Create Data
         if (!$this->polygons->create($data)) {
-            return redirect()->route('map')->with('error',"Polygons failed to add");
+            return redirect()->route('map')->with('error', "Polygons failed to add");
         }
 
 
         // Redirect to map
-        return redirect()->route('map')->with('success',"Polygons has been added");
+        return redirect()->route('map')->with('success', "Polygons has been added");
     }
 
     /**
@@ -91,7 +91,11 @@ class PolygonsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = [
+            'title' => 'Edit Polygon',
+            'id' => $id,
+        ];
+        return view('edit-polygon', $data);
     }
 
     /**
@@ -114,9 +118,9 @@ class PolygonsController extends Controller
         }
 
         //Delete image file
-        if ($imagefile !=null) {
-            if (file_exists('.storage/images/'. $imagefile)) {
-                unlink('.storage/images/' .$imagefile);
+        if ($imagefile != null) {
+            if (file_exists('.storage/images/' . $imagefile)) {
+                unlink('.storage/images/' . $imagefile);
             }
         }
 

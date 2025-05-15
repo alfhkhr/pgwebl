@@ -9,6 +9,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 route::get('/points', [ApiController::class, 'points'])->name('api.points');
+route::get('/point/{id}', [ApiController::class, 'point'])->name('api.point');
 route::get('/polylines', [ApiController::class, 'polylines'])->name('api.polylines');
+route::get('/polyline/{id}', [ApiController::class, 'polyline'])->name('api.polyline');
 route::get('/polygons', [ApiController::class, 'polygons'])->name('api.polygons');
+route::get('/polygon/{id}', [ApiController::class, 'polygon'])->name('api.polygon');
 

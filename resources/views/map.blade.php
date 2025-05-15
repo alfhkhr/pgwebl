@@ -229,14 +229,25 @@ var point = L.geoJson(null, {
                 var routedelete = "{{route('points.destroy', ':id')}}";
                 routedelete = routedelete.replace(':id', feature.properties.id);
 
+                var routeedit = "{{route('points.edit', ':id')}}";
+                routeedit = routeedit.replace(':id', feature.properties.id);
+
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
                     "Description: " + feature.properties.description + "<br>" +
                     "Created: " + feature.properties.created_at + "<br>" +
                     "<img src='{{asset('storage/images')}}/"+ feature.properties.image +"' width='250' alt=''>" + "<br>"+
-                    "<form method='POST' action='" + routedelete + "'>" +
-                    '@csrf' + '@method("DELETE")' +
-                    "<button type='submit' class='btn btn-danger' onclick='return confirm(`Are you sure?`)' btn-sm'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>";
+                    "<div class='row mt-4'>" +
+                        "<div class='col-6 text-end'>" +
+                            "<a href='" + routeedit + "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
+                        "</div>" +
+                    "<div class='col-6 text-end'>" +
+                        "<form method='POST' action='" + routedelete + "'>" +
+                        '@csrf' + '@method("DELETE")' +
+                        "<button type='submit' class='btn btn-danger btn-sm' onclick='return confirm(`Are you sure?`)'><i class='fa-solid fa-trash-can'></i></button>" +
+                        "</form>"
+                      "</div>"
+                     "</div>";
+
                     layer.on({
                     click: function(e) {
                         point.bindPopup(popupContent);
@@ -258,16 +269,27 @@ var polyline = L.geoJson(null, {
                 var routedelete = "{{route('polylines.destroy', ':id')}}";
                 routedelete = routedelete.replace(':id', feature.properties.id);
 
+                var routeedit = "{{route('polylines.edit', ':id')}}";
+                routeedit = routeedit.replace(':id', feature.properties.id);
+
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
                     "Description: " + feature.properties.description + "<br>" +
                     "Length (KM): " + feature.properties.length_km.toFixed(2) + "<br>" +
                     "Created: " + feature.properties.created_at + "<br>" +
-                    "<img src ='{{asset('storage/images')}}/" + feature.properties.image + "' width='200' alt=''>" +
-                    "<form method='POST' action='" + routedelete + "'>" +
-                    '@csrf' + '@method("DELETE")' +
-                    "<button type='submit' class='btn btn-danger' onclick='return confirm(`Are you sure?`)' btn-sm'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>";
-                layer.on({
+                    "<img src ='{{asset('storage/images')}}/" + feature.properties.image + "' width='200' alt=''>" + "<br>"+
+                    "<div class='row mt-4'>" +
+                        "<div class='col-6 text-end'>" +
+                            "<a href='" + routeedit + "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
+                        "</div>" +
+                    "<div class='col-6 text-end'>" +
+                        "<form method='POST' action='" + routedelete + "'>" +
+                        '@csrf' + '@method("DELETE")' +
+                        "<button type='submit' class='btn btn-danger btn-sm' onclick='return confirm(`Are you sure?`)'><i class='fa-solid fa-trash-can'></i></button>" +
+                        "</form>"
+                      "</div>"
+                     "</div>";
+
+                    layer.on({
                     click: function(e) {
                         polyline.bindPopup(popupContent);
                     },
@@ -288,30 +310,43 @@ var polyline = L.geoJson(null, {
                 var routedelete = "{{route('polygons.destroy', ':id')}}";
                 routedelete = routedelete.replace(':id', feature.properties.id);
 
+                var routeedit = "{{route('polygons.edit', ':id')}}";
+                routeedit = routeedit.replace(':id', feature.properties.id);
+
+
                 var popupContent = "Nama: " + feature.properties.name + "<br>" + "Luas (Hektar): " + feature
                        .properties
                        .area_hektar.toFixed(2) + "<br>" + "Luas (Km): " + feature.properties
                        .area_km.toFixed(2) + "<br>" + "Luas (M): " + feature.properties
                        .area_m.toFixed(2) + "<br>" + "Deskripsi: " + feature.properties.description + "<br>" +
                        "Dibuat: " + feature.properties.created_at + "<br>" +
-                       "<img src='{{asset('storage/images')}}/"+ feature.properties.image +"' width='250' alt=''>" + "<form method='POST' action='" + routedelete + "'>" +
+                       "<img src='{{asset('storage/images')}}/"+ feature.properties.image +"' width='250' alt=''>" + + "<br>"+
+                    "<div class='row mt-4'>" +
+                        "<div class='col-6 text-end'>" +
+                            "<a href='" + routeedit + "' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
+                        "</div>" +
+                    "<div class='col-6 text-end'>" +
+                        "<form method='POST' action='" + routedelete + "'>" +
                         '@csrf' + '@method("DELETE")' +
-                        "<button type='submit' class='btn btn-danger' onclick='return confirm(`Are you sure?`)' btn-sm'><i class='fa-solid fa-trash-can'></i></button>" +
-                        "</form>";
-                   layer.on({
-                       click: function(e) {
-                           polygon.bindPopup(popupContent);
-                       },
-                       mouseover: function(e) {
-                           polygon.bindTooltip(feature.properties.name);
-                       },
-                   });
-               },
-           });
-           $.getJSON("{{ route('api.polygons') }}", function(data) {
-               polygon.addData(data);
-               map.addLayer(polygon);
-           });
+                        "<button type='submit' class='btn btn-danger btn-sm' onclick='return confirm(`Are you sure?`)'><i class='fa-solid fa-trash-can'></i></button>" +
+                        "</form>"
+                      "</div>"
+                     "</div>";
+
+                    layer.on({
+                    click: function(e) {
+                        polygon.bindPopup(popupContent);
+                    },
+                    mouseover: function(e) {
+                        polygon.bindTooltip(feature.properties.name);
+                    },
+                });
+            },
+        });
+        $.getJSON("{{ route('api.polygons') }}", function(data) {
+            polygon.addData(data);
+            map.addLayer(polygon);
+        });
 
            // Layer Control
         var baseMaps = {
