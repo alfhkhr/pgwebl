@@ -114,7 +114,8 @@ var drawnItems = new L.FeatureGroup();
                 $('#name').val(properties.name);
                 $('#description').val(properties.description);
                 $('#geom_point').val(objectGeometry);
-                $('#preview-image-point').attr('src', "{{asset('storage/images')}}/" + properties.image);
+                $('#preview-image-point').attr('src',
+                "{{asset('storage/images')}}/" + properties.image);
 
                 //menampilkan modal edit
                 $('#EditPointModal').modal('show');

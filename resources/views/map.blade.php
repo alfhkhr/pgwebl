@@ -235,6 +235,7 @@ var point = L.geoJson(null, {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
                     "Description: " + feature.properties.description + "<br>" +
                     "Created: " + feature.properties.created_at + "<br>" +
+                    "<p> Dibuat : " + feature.properties.user_created + "</p>" + "<br>" +
                     "<img src='{{asset('storage/images')}}/"+ feature.properties.image +"' width='250' alt=''>" + "<br>"+
                     "<div class='row mt-4'>" +
                         "<div class='col-6 text-end'>" +
@@ -244,8 +245,8 @@ var point = L.geoJson(null, {
                         "<form method='POST' action='" + routedelete + "'>" +
                         '@csrf' + '@method("DELETE")' +
                         "<button type='submit' class='btn btn-danger btn-sm' onclick='return confirm(`Are you sure?`)'><i class='fa-solid fa-trash-can'></i></button>" +
-                        "</form>"
-                      "</div>"
+                        "</form>" +
+                      "</div>" +
                      "</div>";
 
                     layer.on({
@@ -276,6 +277,7 @@ var polyline = L.geoJson(null, {
                     "Description: " + feature.properties.description + "<br>" +
                     "Length (KM): " + feature.properties.length_km.toFixed(2) + "<br>" +
                     "Created: " + feature.properties.created_at + "<br>" +
+                    "<p> Dibuat : " + feature.properties.user_created + "</p>" + "<br>" +
                     "<img src ='{{asset('storage/images')}}/" + feature.properties.image + "' width='200' alt=''>" + "<br>"+
                     "<div class='row mt-4'>" +
                         "<div class='col-6 text-end'>" +
@@ -319,7 +321,7 @@ var polyline = L.geoJson(null, {
                        .area_hektar.toFixed(2) + "<br>" + "Luas (Km): " + feature.properties
                        .area_km.toFixed(2) + "<br>" + "Luas (M): " + feature.properties
                        .area_m.toFixed(2) + "<br>" + "Deskripsi: " + feature.properties.description + "<br>" +
-                       "Dibuat: " + feature.properties.created_at + "<br>" +
+                       "<p> Dibuat : " + feature.properties.user_created + "</p>" + "<br>" +
                        "<img src='{{asset('storage/images')}}/"+ feature.properties.image +"' width='250' alt=''>" +"<br>"+
                     "<div class='row mt-4'>" +
                         "<div class='col-6 text-end'>" +
