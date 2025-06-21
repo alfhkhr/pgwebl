@@ -33,7 +33,7 @@
                     </ul>
                 </li>
                 @endauth
-                
+
                 @auth
                 <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">
